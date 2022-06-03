@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+	{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de compras</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{% static 'core/css/cartcss.css'%}"
+</head>
+<body>
+    <div class="wrapper">
+		<h1>Carrito</h1>
+		<div class="project">
+			<div class="shop">
+				<div class="box">
+					<img src="{% static 'core/img/collar.png'%}">
+					<div class="content">
+						<h3>Collar perro</h3>
+						<h4>Precio: $6.500</h4>
+						<p class="unit">Cantidad: <input name="" value="1"></p>
+						<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Eliminar</span></p>
+					</div>
+				</div>
+				<div class="box">
+					<img src="{% static 'core/img/pixlr-bg-result (5) (1).png'%}">
+					<div class="content">
+						<h3>Botella para perros</h3>
+						<h4>Precio: $6.500</h4>
+						<p class="unit">Cantidad: <input name="" value="1"></p>
+						<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Eliminar</span></p>
+					</div>
+				</div>
+                <div class="box">
+					<img src="{% static 'core/img/pixlr-bg-result (3) (1).png'%}">
+					<div class="content">
+						<h3>Pato de ule</h3>
+						<h4>Precio: $6.500</h4>
+						<p class="unit">Cantidad: <input name="" value="1"></p>
+						<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Eliminar</span></p>
+					</div>
+				</div>
+				<div class="box">
+					<img src="{% static 'core/img/JUGUETEGATOG.png'%}">
+					<div class="content">
+						<h3>Pez de juguete</h3>
+						<h4>Precio: $6.500</h4>
+						<p class="unit">Cantidad: <input name="" value="1"></p>
+						<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Eliminar</span></p>
+					</div>
+				</div>
+			</div>
+			<div class="right-bar">
+				<p><span>Subtotal</span> <span>$26.000</span></p>
+				<hr>
+				<p><span>Iva (19%)</span> <span>$4.940</span></p>
+				<hr>
+				<p><span>Envio</span> <span>$5.000</span></p>
+				<hr>
+				<p><span>Total</span> <span>$35.940</span></p><a href="#"><i class="fa fa-shopping-cart"></i>Comprar</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

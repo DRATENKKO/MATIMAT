@@ -1,0 +1,7 @@
+body {
+    background-color: rgb(217, 217, 217);  /* fallback for old browsers */
+    font-family: 'Arial';
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+}

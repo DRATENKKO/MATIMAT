@@ -1,0 +1,115 @@
+{% extends "./base.html"%}
+{% load static%}
+<title>{% block title %} Pago {% endblock %}</title>
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/estilocompra.css'%}">
+{% endblock %}
+
+{% block body%}
+
+</head>
+<body>
+
+	<div class="contenedor">
+
+		<!-- MOSTRAR ICONO TARJETA (4 VISA ) (5 MASTERCARD ) -->
+		<section id="tarjeta">
+			<div class="delantera">
+				<div  class="datos" class="grupo" id="numero">
+				</div>
+			</div>
+		</section>
+		<!-- Formulario -->
+		<form  action="https://formspree.io/f/mgedpjky" method="POST"  id="formulario-tarjeta" class="formulario-tarjeta">
+
+			<div class="imagentarjetavm">
+			<img src="{% static 'core/img/tarjetaimagen.png'%}" width="100%">
+			</div>
+			<div class="grupo">
+				<div class="delantera">
+					<div class="logo-marca" id="logo-marca">
+					</div>
+				<label for="inputNumero">Número Tarjeta</label>
+				<input type="text" id="inputNumero" maxlength="19" autocomplete="off">
+				
+			</div>
+			<div class="grupo">
+				<label for="inputNombre">Nombre</label>
+				<input type="text" id="inputNombre" maxlength="26" autocomplete="off">
+			</div>
+			<div class="flexbox">
+				<div class="grupo expira">
+					<label for="selectMes">Expiracion</label>
+					<div class="flexbox">
+						<div class="grupo-select">
+							<select name="mes" id="selectMes">
+								<option disabled selected>Mes</option>
+							</select>
+							<i class="fas fa-angle-down"></i>
+						</div>
+						<div class="grupo-select">
+							<select name="year" id="selectYear">
+								<option disabled selected>Año</option>
+							</select>
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</div>
+				</div>
+
+				<div class="grupo ccv">
+					<label for="inputCCV">CCV</label>
+					<input type="text" id="inputCCV" maxlength="3">
+				</div>
+			</div>
+			<button onclick="mostrar()" type="submit" class="btn-enviar">Enviar</button>
+		</form>
+	</div>
+
+	
+	<script> 
+        const $form = document.querySelector('#formulario-tarjeta')
+        const num1 = document.getElementById('#inputNumero');
+        const nom2 = document.getElementById('#inputNombre');
+        const mes3 = document.getElementById('#selectMes');
+        const anno4 = document.getElementById('#selectYear');
+        const ccv5 = document.getElementById('#inputCCV');
+		const terminos1 = document.getElementById('#terminos')
+        $form.addEventListener('submit', handleSubmit)
+  
+
+        async function handleSubmit(event) {
+          event.preventDefault()
+          const form = new FormData(this)
+          const response = await fetch(this.action, {
+            method: this.method,
+            body: form,
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+  
+          if ((inputNumero.value == '') || (inputNombre.value == '') || (selectMes.value == '') || (selectYear.value == '')) {
+            this.reset()
+            alert('DEBE LLENAR TODOS LOS CAMPOS!')
+          }else {
+  
+          if (response.ok) 
+            this.reset()
+			alert('EL PAGO DE LA DONACION HA SIDO EXITOSA!')
+			location.replace(".")
+			
+          }
+        }
+
+      </script>
+
+
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+	<script src="{% static 'core/js/maintarjeta.js' %}"></script>
+	
+</body>
+</html>
+
+{% endblock%}

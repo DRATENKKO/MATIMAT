@@ -1,0 +1,99 @@
+{% extends "./base.html"%}
+{% load static%}
+
+<title>{% block title %} Gatos {% endblock %}</title>
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
+{% endblock %}
+
+
+{% block body%}
+<hr>
+<h3 style="text-align:center;">Productos de Gatos</h3>
+<hr>
+<!-- Incio Tarjetas -->
+    <div class="container">
+      <section class="card-section">
+        <div class="conte">
+          <div class="tarjeta collar" >
+            <img src="{% static 'core/img/CAÑAGATOG.png' %}">
+          </div>
+          <div class="informacion" >
+            <h1>Caña de juguete</h1>
+            <p class="fecha"> Stock: 20 Unidades </p>
+          </div>  
+          <div class="precio">
+            <div class="box-precio">
+              <span class="precio1" style="text-decoration:line-through";> $/8.000 </span>
+              <span class="precio2"> <b>$/6.500</b> </span>
+            </div>
+            <span class="shoping"> <i class="fas fa-cart-plus"></i></span>
+          </div>
+        </div>
+        <div class="conte">
+          <div class="tarjeta collar">
+            <img src="{% static 'core/img/JUGUETEGATOG.png' %}">
+          </div>
+          <div class="informacion">
+            <h1>Pez de juguete</h1>
+            <p class="fecha"> Stock: 50 Unidades </p>
+          </div>  
+          <div class="precio">
+            <div class="box-precio">
+              <span class="precio1" style="text-decoration:line-through";> $/8.000 </span>
+              <span class="precio2"> <b>$/6.500</b> </span>
+            </div>
+            <span class="shoping"> <i class="fas fa-cart-plus"></i></span>
+          </div>
+        </div>
+        <div class="conte">
+          <div class="tarjeta collar">
+            <img src="{% static 'core/img/pixlr-bg-result (3) (1).png' %}">
+          </div>
+          <div class="informacion">
+            <h1>Pato de ule</h1>
+            <p class="fecha"> Stock: 30 Unidades </p>
+          </div>  
+          <div class="precio">
+            <div class="box-precio">
+              <span class="precio1" style="text-decoration:line-through";> $/8.000 </span>
+              <span class="precio2"> <b>$/6.500</b> </span>
+            </div>
+            <span class="shoping"> <i class="fas fa-cart-plus"></i></span>
+          </div>
+        </div>
+
+        <div class="conte">
+          <div class="tarjeta collar">
+            <img src="{% static 'core/img/AreneroG.png' %}">
+          </div>
+          <div class="informacion">
+            <h1>Arenero de Gato</h1>
+            <p class="fecha"> Stock: 30 Unidades </p>
+          </div>  
+          <div class="precio">
+            <div class="box-precio">
+              <span class="precio1" style="text-decoration:line-through";> $/8.000 </span>
+              <span class="precio2"> <b>$/6.500</b> </span>
+            </div>
+            <span class="shoping"> <i class="fas fa-cart-plus"></i></span>
+          </div>
+        </div>
+        <script type="text/javascript" src="{% static 'core/js/vanilla-tilt.js' %}"></script>
+        <script>
+          VanillaTilt.init(document.querySelectorAll(".conte"), {
+            max: 35,
+            speed: 400,
+            glare: true, 
+              "max-glare": 1,
+          });
+        </script>
+      </section>
+
+
+    </body>
+    </header>
+    </html>
+
+    {% endblock %}
