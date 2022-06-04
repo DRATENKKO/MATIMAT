@@ -113,6 +113,21 @@
 }
 </script>
 <!-- Suscripciones -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if messages %}
+  {% for m in messages %}
+    <script>
+      Swal.fire({
+        "title": "Felicidades!",
+        "text": "{{m}}",
+        "icon": "success",
+
+      })
+    </script>
+  {% endfor %}
+{% endif %}
+
 
 <!-- Inicio Footer -->
     </body>

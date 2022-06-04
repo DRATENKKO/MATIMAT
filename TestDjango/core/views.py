@@ -2,11 +2,12 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django. views. decorators. csrf import csrf_exempt
 
-from core.forms import ProductoForm
+from core.forms import ProductoForm, CustomUserCreationForm
 from .models import Producto
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -105,6 +106,23 @@ def modificarProducto(request, idProducto):
         data["form"] = formulario
         
     return render(request,  'core/modificar.html', data)
+
+
+def registro(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Te has registrado correctamente")
+            return redirect(to="index")
+        data["form"] = formulario        
+    return render(request, 'registration/registro.html', data)
     
 
 
