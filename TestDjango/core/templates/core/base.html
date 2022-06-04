@@ -20,8 +20,7 @@
 
   <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
 
-  {% block js %}
-  {% endblock %}
+
 
   <title>
   {% block title %} 
@@ -94,17 +93,7 @@
   </nav>
       <div class="container py-4">
 
-        {% if messages %}
-          {% for m in messages %}
-            {{m}}
-          {% endfor %}
-
-        {% endif %}
-
-
-
-        {% block body%}
-        
+        {% block body%}     
         {% endblock %}
       </div>
 
@@ -151,6 +140,9 @@
         }
         </script>
         
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 
 </body>

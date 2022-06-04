@@ -71,7 +71,7 @@ def agregar(request):
         
         if formulario.is_valid:
             formulario.save()
-            datos["mensaje"] = "Guardados Correctamente"
+            messages.success(request, "Guardado correctamente!")
         else:
             datos["form"] = formulario
     
@@ -79,9 +79,11 @@ def agregar(request):
 
 @csrf_exempt
 def eliminarProducto(request, idProducto):
-    producto = Producto.objects.get(idProducto=idProducto)
+    producto = get_object_or_404(Producto, idProducto=idProducto)
     producto.delete()
-    return redirect('/listar')
+    messages.success(request, "Eliminado correctamente")
+    return redirect(to="/listar" )
+    #return redirect(to="listar")
 
 
 
@@ -98,8 +100,8 @@ def modificarProducto(request, idProducto):
         formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "modificado correctamente")
-            return redirect('/listar')
+            messages.success(request, "Modificado correctamente")
+            return redirect(to="listar")
         data["form"] = formulario
         
     return render(request,  'core/modificar.html', data)
