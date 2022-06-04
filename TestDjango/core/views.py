@@ -6,7 +6,7 @@ from core.forms import ProductoForm
 from .models import Producto
 from django.core.paginator import Paginator
 from django.http import Http404
-
+from django.contrib import messages
 
 # Create your views here.
 
@@ -98,6 +98,7 @@ def modificarProducto(request, idProducto):
         formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "modificado correctamente")
             return redirect('/listar')
         data["form"] = formulario
         

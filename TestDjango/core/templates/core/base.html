@@ -93,6 +93,16 @@
   </div>
   </nav>
       <div class="container py-4">
+
+        {% if messages %}
+          {% for m in messages %}
+            {{m}}
+          {% endfor %}
+
+        {% endif %}
+
+
+
         {% block body%}
         
         {% endblock %}
