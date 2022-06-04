@@ -21,7 +21,7 @@ class CategoriaEspecie(models.Model):
 class Producto(models.Model):
     idProducto = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=50)
-    precio = models.IntegerField()
+    precio = models.CharField(max_length=9)
     stock = models.IntegerField()
     categoria = models.ForeignKey(CategoriaProducto, on_delete=models.CASCADE)
     especie = models.ForeignKey(CategoriaEspecie, on_delete=models.CASCADE)
