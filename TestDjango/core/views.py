@@ -2,8 +2,8 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django. views. decorators. csrf import csrf_exempt
 
-from core.forms import ProductoForm, CustomUserCreationForm
-from .models import Producto
+from core.forms import ProductoForm, CustomUserCreationForm, DonacionForm
+from .models import Producto, Donacion
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib import messages
@@ -123,6 +123,32 @@ def registro(request):
             return redirect(to="index")
         data["form"] = formulario        
     return render(request, 'registration/registro.html', data)
+
+
+def donacion(request):
+    donacionListado = Donacion.objects.all()
+    
+    datos= {
+            'donacion': donacionListado
+        }  
+    return render(request, 'core/donacion.html', datos)
+
+
+def agregardonacion(request):
+    datos= {
+        'form' : DonacionForm()
+    }  
+    if request.method == 'POST':
+        formulario = DonacionForm(request.POST, files=request.FILES)
+        
+        if formulario.is_valid:
+            formulario.save()
+            messages.success(request, "Guardado correctamente!")
+        else:
+            datos["form"] = formulario
+    
+    return render(request, 'core/agregardonacion.html', datos)
+
     
 
 

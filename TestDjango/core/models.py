@@ -30,6 +30,17 @@ class Producto(models.Model):
     def __str__(self):
         texto = "{0} ({1})"
         return texto.format(self.idProducto, self.nombre)
+    
+class Donacion(models.Model):
+    idDonante = models.IntegerField(primary_key=True)
+    nombreD = models.CharField(max_length=50)
+    correo = models.CharField(max_length=50)
+    telefono = models.IntegerField()
+    donacion = models.IntegerField()
+
+    def _str_(self):
+        texto = "{0} ({1})"
+        return texto.format(self.nombreD,self.donacion)
 
 
 
