@@ -19,7 +19,8 @@
   {% endblock %}
 
   <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
-
+  {% block js %}
+  {% endblock %}
 
 
   <title>
@@ -50,7 +51,7 @@
             <a class="nav-link" href="#suscr">Suscripcion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'donacion' %}">Donar</a> 
+            <a class="nav-link" href="{% url 'agregardonacion' %}">Donar</a> 
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -165,7 +166,6 @@
         }
         </script>
         
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 

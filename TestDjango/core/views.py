@@ -143,7 +143,7 @@ def agregardonacion(request):
         
         if formulario.is_valid:
             formulario.save()
-            messages.success(request, "Guardado correctamente!")
+            messages.success(request, "¡Gracias por tu donacion! Has sido beneficiado con un 5% de descuento en tu próxima compra.")
         else:
             datos["form"] = formulario
     

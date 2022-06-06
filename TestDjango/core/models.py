@@ -21,7 +21,7 @@ class CategoriaEspecie(models.Model):
 class Producto(models.Model):
     idProducto = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=50)
-    precio = models.CharField(max_length=9)
+    precio = models.IntegerField()
     stock = models.IntegerField()
     categoria = models.ForeignKey(CategoriaProducto, on_delete=models.CASCADE)
     especie = models.ForeignKey(CategoriaEspecie, on_delete=models.CASCADE)
@@ -31,16 +31,35 @@ class Producto(models.Model):
         texto = "{0} ({1})"
         return texto.format(self.idProducto, self.nombre)
     
-class Donacion(models.Model):
-    idDonante = models.IntegerField(primary_key=True)
-    nombreD = models.CharField(max_length=50)
+    
+class Cliente(models.Model):
+    idCliente = models.IntegerField(primary_key=True)
+    nombreCliente = models.CharField(max_length=50)
     correo = models.CharField(max_length=50)
+    direccion = models.CharField(max_length=50)
     telefono = models.IntegerField()
-    donacion = models.IntegerField()
 
     def _str_(self):
         texto = "{0} ({1})"
-        return texto.format(self.nombreD,self.donacion)
+        return texto.format(self.idCliente, self.nombreCliente)
+    
+    
+class Donacion(models.Model):
+
+    
+    nombrecompleto = models.CharField(max_length=50)
+    correo = models.EmailField(max_length=254)
+    telefono = models.IntegerField()
+    valor = models.IntegerField()
+
+    def _str_(self):
+        texto = "{0} ({1})"
+        return texto.format(self.nombrecompleto, self.correo, self.telefono)
+
+    
+
+    
+
 
 
 

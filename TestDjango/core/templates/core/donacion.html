@@ -25,22 +25,20 @@
                           <table class="table table-striped table-hover ">
                               <thread class="table-dark">
                                   <tr>
-                                      <th>idDonante</th>
-                                      <th>nombreD</th>
-                                      <th>correo</th>
-                                      <th>telefono</th>
-                                      <th>donacion</th>
+                                      <th>Nombre Completo</th>
+                                      <th>Correo</th>
+                                      <th>Telefono</th>
+                                      <th>Valor</th>
                                       <th colspan="2">Opciones</th>
                                   </tr>
                               </thread>
                           <tbody>
                               {% for d in donacion%}
                               <tr>
-                              <td>{{d.idDonante}} </td>
-                              <td>{{d.nombreD}} </td>
-                              <td>{{d.correo}} </td>
-                              <td>{{d.telefono}} </td>
-                              <td>{{d.donacion}} </td>
+                              <td>{{d.nombrecompleto }} </td>
+                              <td>{{d.correo }} </td>
+                              <td>{{d.telefono }} </td>
+                              <td>{{d.valor }} </td>
                               <td> <a href="#" class="btn btn-info">Editar</td>
                               <td> <a href="#" class="btn btn-danger">Eliminar</td>
                               </tr>

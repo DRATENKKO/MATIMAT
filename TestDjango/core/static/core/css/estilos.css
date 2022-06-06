@@ -602,7 +602,7 @@ p {
 
 
 .conte{
-    height: 510px;
+    height: 450px;
     box-shadow:0 0 7px #fff ;
     flex-basis: 100%;
     margin-top: 1.2rem;
@@ -613,13 +613,14 @@ p {
 .conte .tarjeta{
     height: 200px;
     width: 100%;
-    margin-bottom: 170px;
+    margin-bottom: 130px;
     border-radius: 15px;
     transition: 0.5s;
     
     
 }
 .tarjeta img{
+  padding: 50px;
     margin: auto;
     display: block;
     
@@ -642,14 +643,13 @@ p {
   color: #333;
   margin-top: -10px;
   padding: 2px;
-  margin-bottom: -10px;
+  margin-bottom: -5px;
 }
 .informacion p{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: .9em;
     color: #555;
-    margin-bottom: -10px;
+    margin-bottom: -4px;
 
 }
 
@@ -682,7 +682,7 @@ p {
 }
 .shoping{
     font-size: 1.5em;
-    color: #555;
+    color: #fff;
 }
 .card:hover .conte{
   opacity: 1;
@@ -692,6 +692,7 @@ a{
   position: relative;
   text-decoration: none;
   letter-spacing: 0.5px;
+  color: #fff;
 
 }
 
