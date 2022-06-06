@@ -20,7 +20,7 @@ class ProductoForm(forms.ModelForm):
     
     class Meta:
         model = Producto
-        fields = '__all__'
+        fields =  ["nombre","precio","stock","categoria","especie", "imagen"]
 
 class CustomUserCreationForm(UserCreationForm): 
     class Meta: 
@@ -36,15 +36,14 @@ class ClienteForm(ModelForm):
               
 class DonacionForm(ModelForm):
     
-    nombrecompleto = forms.CharField(min_length=3, max_length=50)
-    correo = forms.EmailField(max_length=254)
-    telefono = forms.IntegerField(max_value=999999999)
-    valor = forms.IntegerField(min_value=1000, max_value=1500000)
-    
+    nombrecompleto = forms.CharField(min_length=3, max_length=50, label="Nombre Completo")
+    correo = forms.EmailField(max_length=254, label="Correo")
+    telefono = forms.IntegerField(max_value=999999999, label="Telefono")
+    valor = forms.IntegerField(min_value=1000, max_value=1500000, label="Valor")
     
     class Meta:
        model = Donacion
-       fields = '__all__'
+       fields = ["nombrecompleto","correo","telefono","valor"]
         
         
     
