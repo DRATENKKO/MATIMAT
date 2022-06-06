@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
@@ -39,11 +40,14 @@ def tarjeta(request):
 def todos(request):
     return render(request, 'core/todos.html')
 
-@csrf_exempt
+
 def modificar(request):
     return render(request, 'core/modificar.html')
 
+
+
 @csrf_exempt
+@permission_required('app.view_producto')
 def listar(request):
     productosListado = Producto.objects.all()
     page = request.GET.get('page', 1)
@@ -62,7 +66,9 @@ def listar(request):
     
     return render(request, 'core/listar.html', datos)
 
+
 @csrf_exempt
+@permission_required('app.add_producto')
 def agregar(request):
     datos= {
         'form' : ProductoForm()
@@ -78,7 +84,9 @@ def agregar(request):
     
     return render(request, 'core/agregar.html', datos)
 
+
 @csrf_exempt
+@permission_required('app.delete_producto')
 def eliminarProducto(request, idProducto):
     producto = get_object_or_404(Producto, idProducto=idProducto)
     producto.delete()
@@ -86,9 +94,8 @@ def eliminarProducto(request, idProducto):
     return redirect(to="/listar" )
     #return redirect(to="listar")
 
-
-
 @csrf_exempt
+@permission_required('app.change_producto')
 def modificarProducto(request, idProducto):
     
     producto = get_object_or_404(Producto, idProducto=idProducto)
