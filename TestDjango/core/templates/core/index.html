@@ -86,6 +86,14 @@
           </div>
         </div>
         {% endfor %}
+        <script type="text/javascript" src="{% static 'core/js/vanilla-tilt.js' %}"></script>
+        <script>
+          VanillaTilt.init(document.querySelectorAll(".conte"), {
+            max: 35,
+            speed: 400,
+            glare: true, 
+              "max-glare": 1,
+          });
 </section>
 
 <!-- Termino Tarjetas -->
