@@ -69,7 +69,7 @@
             {% endif %}
             {% if perms.app.view_donacion %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'agregardonacion' %}">Lista Donaciones</a> 
+              <a class="nav-link" href="{% url 'donacion' %}">Lista Donaciones</a> 
             </li>
             {% endif %}
           <li class="nav-item">
@@ -82,7 +82,7 @@
           <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i>
           </button>
           <span class="shoping">
-            <a class="fa-solid fa-cart-plus" href="Carrito.html"></a>
+            <a class="fa-solid fa-cart-plus" href="{% url 'Carrito' %}"></a>
           </span>
           {% if user.is_authenticated %}
           <li>
