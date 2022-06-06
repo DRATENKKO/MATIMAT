@@ -19,6 +19,8 @@ class CategoriaEspecie(models.Model):
         return self.nombreEspecie
 
 class Producto(models.Model):
+    
+    
     idProducto = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=50)
     precio = models.IntegerField()
