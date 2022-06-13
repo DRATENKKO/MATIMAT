@@ -10,8 +10,6 @@ class ProductoForm(forms.ModelForm):
     precio = forms.IntegerField(min_value=1, max_value=1500000)
     imagen = forms.ImageField(required=False, validators=[MaxSizeFileValidator(max_file_size=2)])
     
-
-    
     class Meta:
         model = Producto
         fields =  ["nombre","precio","stock","categoria","especie", "imagen"]

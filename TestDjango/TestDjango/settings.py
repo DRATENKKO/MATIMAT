@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'core',
     'crispy_forms',
     'django.contrib.humanize',
+    'rest_framework',
+    'rest_producto',
 
 ]
 
