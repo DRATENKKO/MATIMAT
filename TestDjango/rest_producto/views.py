@@ -27,9 +27,9 @@ def lista_productos(request):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def detalle_producto(request, nombre):
+def detalle_producto(request, id):
     try: # busco un producto por id
-        producto = Producto.objects.get(nombre=nombre)
+        producto = Producto.objects.get(idProducto=id)
     except Producto.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
