@@ -96,6 +96,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# connect to oracle database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.oracle',
+#         'NAME': 'XE',
+#         'USER': 'a_user',
+#         'PASSWORD': 'a_password',
+#         'HOST': 'localhost',
+#         'PORT': '1521',
+#     }
+# }
+
 
 
 # Password validation
