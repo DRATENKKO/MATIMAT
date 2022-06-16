@@ -1,16 +1,20 @@
 from django.shortcuts import render
 from rest_framework import status
-from rest_framework.decorators import api_view # sin este no puedo crear la api
+from rest_framework.decorators import api_view, permission_classes # sin este no puedo crear la api
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from core.models import Producto
 from .serializers import ProductoSerializer
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 
 # Create your views here.
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
+@permission_classes((IsAuthenticated,))
 def lista_productos(request):
     #discriminar si es GET O POST  
     if request.method=='GET':
@@ -27,6 +31,7 @@ def lista_productos(request):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((IsAuthenticated,))
 def detalle_producto(request, id):
     try: # busco un producto por id
         producto = Producto.objects.get(idProducto=id)
@@ -51,4 +56,4 @@ def detalle_producto(request, id):
         producto.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-          
+
