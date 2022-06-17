@@ -38,11 +38,11 @@ def detalle_producto(request, id):
     except Producto.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method=='GET': # obtengo los datos de UN PRODUCTO por su nombre 
+    if request.method=='GET': # obtengo los datos de UN PRODUCTO por su id 
         serializer=ProductoSerializer(producto)
         return Response(serializer.data)
 
-    if request.method=='PUT': #
+    if request.method=='PUT': 
         data = JSONParser().parse(request)
         serializer = ProductoSerializer(producto, data=data)
 
@@ -52,7 +52,7 @@ def detalle_producto(request, id):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-    elif request.method=='DELETE': # elimino un producto por su nombre
+    elif request.method=='DELETE': # elimino un producto por su id
         producto.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
