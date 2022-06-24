@@ -19,6 +19,7 @@
   {% endblock %}
 
   <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
+  
   {% block js %}
   {% endblock %}
 
@@ -83,6 +84,8 @@
           </button>
           <span class="shoping">
             <a class="fa-solid fa-cart-plus" href="{% url 'Carrito' %}"></a>
+
+            {% include "carro/widget.html" %}
           </span>
           {% if user.is_authenticated %}
           <li>

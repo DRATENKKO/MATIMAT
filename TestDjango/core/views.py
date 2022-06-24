@@ -1,18 +1,22 @@
+from distutils.log import error
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django. views. decorators. csrf import csrf_exempt
-
+from carro.carro import Carro
 from core.forms import ProductoForm, CustomUserCreationForm, DonacionForm
-from .models import Producto, Donacion
+from .models import Producto
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 
+
 # Create your views here.
 
 def index(request):
+    
+    carro = Carro(request)
     
     productos = Producto.objects.all()
     
@@ -76,7 +80,7 @@ def agregar(request):
     if request.method == 'POST':
         formulario = ProductoForm(request.POST, files=request.FILES)
         
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
             messages.success(request, "Guardado correctamente!")
         else:
@@ -132,15 +136,8 @@ def registro(request):
     return render(request, 'registration/registro.html', data)
 
 
-def donacion(request):
-    donacionListado = Donacion.objects.all()
-    
-    datos= {
-            'donacion': donacionListado
-        }  
-    return render(request, 'core/donacion.html', datos)
-
-
+@csrf_exempt
+@permission_required('app.add_donacion')
 def agregardonacion(request):
     datos= {
         'form' : DonacionForm()
@@ -148,13 +145,27 @@ def agregardonacion(request):
     if request.method == 'POST':
         formulario = DonacionForm(request.POST, files=request.FILES)
         
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
             messages.success(request, "¡Gracias por tu donacion! Has sido beneficiado con un 5% de descuento en tu próxima compra.")
         else:
             datos["form"] = formulario
     
     return render(request, 'core/agregardonacion.html', datos)
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
 
     
 

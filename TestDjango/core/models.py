@@ -1,6 +1,9 @@
 from contextlib import nullcontext
+from email.policy import default
+from signal import default_int_handler
 from typing import TextIO
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -17,10 +20,8 @@ class CategoriaEspecie(models.Model):
 
     def __str__(self):
         return self.nombreEspecie
-
+    
 class Producto(models.Model):
-    
-    
     idProducto = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=50)
     precio = models.IntegerField()
@@ -45,18 +46,17 @@ class Cliente(models.Model):
         texto = "{0} ({1})"
         return texto.format(self.idCliente, self.nombreCliente)
     
-    
-class Donacion(models.Model):
-    id = models.IntegerField(primary_key=True)
-    nombrecompleto = models.CharField(max_length=50)
+class Donacion(models.Model):   
+    nombredonante = models.CharField(max_length=50)
     correo = models.EmailField(max_length=254)
     telefono = models.IntegerField()
     valor = models.IntegerField()
+    desc = models.DecimalField(default=0.05, max_digits=5, decimal_places=2)
+    
 
     def _str_(self):
-        texto = "{0} ({1})"
-        return texto.format(self.nombrecompleto, self.correo, self.telefono)
-
+        return self.nombredonante
+    
     
 
     

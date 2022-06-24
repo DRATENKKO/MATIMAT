@@ -67,23 +67,27 @@
 <!-- Inicio Tarjetas --> 
       {% load humanize %}
       <section class="card-section" id="producto" >
-        {% for p in productos%}  
+        {% for producto in productos%}  
         <div class="conte">  
           <div class="tarjeta collar">
-            {% if p.imagen %}
-            <img src="{{ p.imagen.url }} ">
+            {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }} ">
             {% endif %}  
           </div>  
           <div class="informacion">
             <h1>{{ p.nombre | title }}</h1>
-            <p class=""> Especie: {{ p.especie | capfirst }} </p>
-            <p class="fecha"> Stock: {{ p.stock }} unidades </p>
+            <p class=""> Especie: {{ producto.especie | capfirst }} </p>
+            <p class="fecha"> Stock: {{ producto.stock }} unidades </p>
           </div>  
           <div class="precio">
             <div class="box-precio">
-              <span class="precio2"> ${{ p.precio | intcomma }} </span>
+              <span class="precio2"> ${{ producto.precio | intcomma }} </span>
             </div>
+            </div>
+            <div class="card-footer text-center">
+              <a href="{% url 'carro:agregar' producto.idProducto %}" class="btn btn-success">Agregar al carro </a>
           </div>
+
         </div>
         {% endfor %}
         <script type="text/javascript" src="{% static 'core/js/vanilla-tilt.js' %}"></script>
@@ -95,6 +99,8 @@
               "max-glare": 1,
           });
         </script>
+
+
 </section>
 
 <!-- Termino Tarjetas -->

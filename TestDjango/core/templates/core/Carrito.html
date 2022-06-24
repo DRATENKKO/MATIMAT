@@ -8,57 +8,48 @@
 	<link rel="stylesheet" href="{% static 'core/css/cartcss.css'%}"
 </head>
 <body>
-    <div class="wrapper">
-		<h1>Carrito</h1>
-		<div class="project">
-			<div class="shop">
-				<div class="box">
-					<img src="{% static 'core/img/collar.png'%}">
-					<div class="content">
-						<h3>Collar perro</h3>
-						<h4>Precio: $6.500</h4>
-						<p class="unit">Cantidad: <input name="" value="1"></p>
-						<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Eliminar</span></p>
-					</div>
-				</div>
-				<div class="box">
-					<img src="{% static 'core/img/pixlr-bg-result (5) (1).png'%}">
-					<div class="content">
-						<h3>Botella para perros</h3>
-						<h4>Precio: $6.500</h4>
-						<p class="unit">Cantidad: <input name="" value="1"></p>
-						<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Eliminar</span></p>
-					</div>
-				</div>
-                <div class="box">
-					<img src="{% static 'core/img/pixlr-bg-result (3) (1).png'%}">
-					<div class="content">
-						<h3>Pato de ule</h3>
-						<h4>Precio: $6.500</h4>
-						<p class="unit">Cantidad: <input name="" value="1"></p>
-						<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Eliminar</span></p>
-					</div>
-				</div>
-				<div class="box">
-					<img src="{% static 'core/img/JUGUETEGATOG.png'%}">
-					<div class="content">
-						<h3>Pez de juguete</h3>
-						<h4>Precio: $6.500</h4>
-						<p class="unit">Cantidad: <input name="" value="1"></p>
-						<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Eliminar</span></p>
-					</div>
-				</div>
-			</div>
-			<div class="right-bar">
-				<p><span>Subtotal</span> <span>$26.000</span></p>
-				<hr>
-				<p><span>Iva (19%)</span> <span>$4.940</span></p>
-				<hr>
-				<p><span>Envio</span> <span>$5.000</span></p>
-				<hr>
-				<p><span>Total</span> <span>$35.940</span></p><a href="#"><i class="fa fa-shopping-cart"></i>Comprar</a>
-			</div>
+	<div class="alert alert-primary" role="alert">
+		<table class="table table-bordered">
+		  <thead>
+			<tr>
+			  <th scope="row" colspan="3" class="text-center">CARRITO</th>
+			</tr>
+			<tr>
+			  <th scope="col">NOMBRE</th>
+			  <th scope="col">PRECIO</th>
+			  <th scope="col">CANTIDAD</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		  {% if request.session.carrito.items %}
+		  {% for key, value in request.session.carrito.items %}
+			<tr>
+			  <td>{{value.nombre}}</td>
+			  <td>{{value.precio}}</td>
+			  <td>{{value.acumulado}}
+				<a href="{% url 'Add' value.producto_idProducto %}" class="badge btn btn-dark badge-dark">+</a>
+				<a href="{% url 'Sub' value.producto_idProducto %}" class="badge btn btn-dark badge-dark">-</a>
+			  </td>
+			</tr>
+		  {% endfor %}
+		  {% else %}
+		  <tr>
+			  <td colspan="3">
+				  <div class="alert alert-danger text-center"> Sin Productos </div>
+			  </td>
+		  </tr>
+		  {% endif %}
+			<tr>
+			  <th scope="row">Total:</th>
+			  <td colspan="2">$ {{total_carrito}}</td>
+			</tr>
+		  </tbody>
+		</table>
+		<hr>
 		</div>
-	</div>
+		<div class="row text-center">
+			<div class="col-6"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
+			<div class="col-6"><a href="#" class="btn btn-success">Guardar</a></div>
+		</div>
 </body>
 </html>

@@ -465,6 +465,13 @@ div.center {
   display: block;
 }
 
+#error_1_id_nombredonante {
+  color: black
+}
+
+#error_1_id_correo {
+  color: black;
+}
 
   button.btn.btn-outline-info {
     color: #ffffff;
@@ -602,7 +609,6 @@ p {
 
 
 .conte{
-    height: 450px;
     box-shadow:0 0 7px #fff ;
     flex-basis: 100%;
     margin-top: 1.2rem;
