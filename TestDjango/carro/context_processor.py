@@ -3,8 +3,8 @@ def importe_total_carrito(request):
 
     if request.user.is_authenticated:
         for key, value in request.session["carro"].items():
-            total += total+(int(value["precio"])*value["cantidad"])
+            total = total+int(value["precio"])
             
     else : 
-        total = "Debes iniciar sesión para realizar una compra."
+        total = "Debes iniciar sesión para ver el total."
     return {"importe_total_carrito":total}

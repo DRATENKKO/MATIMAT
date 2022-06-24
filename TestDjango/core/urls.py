@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, donacion, Carrito, Gato, Perro, tarjeta, todos, listar, modificar,agregar, eliminarProducto, modificarProducto, registro, agregardonacion
+from .views import index, donacion, Carrito, Gato, Perro, tarjeta, todos, listar, modificar,agregar, eliminarProducto, modificarProducto, registro, agregardonacion, widget
 
 urlpatterns = [
     path('', index, name='index'),
@@ -16,4 +16,5 @@ urlpatterns = [
     path('modificarProducto/<idProducto>', modificarProducto, name='modificarProducto'),
     path('registro/', registro, name='registro'),
     path('agregardonacion/', agregardonacion, name='agregardonacion'),
+    path('widget/', widget, name="widget"),
 ]

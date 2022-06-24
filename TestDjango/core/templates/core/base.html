@@ -34,7 +34,7 @@
 <body>
   <div class="container">
   </div>
-
+  
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid" >
       <a class="navbar-brand" href="{% url 'index' %}">
@@ -84,8 +84,7 @@
           </button>
           <span class="shoping">
             <a class="fa-solid fa-cart-plus" href="{% url 'Carrito' %}"></a>
-
-            {% include "carro/widget.html" %}
+        
           </span>
           {% if user.is_authenticated %}
           <li>
@@ -105,11 +104,14 @@
             </span>
           </li>
           {% endif %}
+          {% include "carro/widget.html" %}
         </div>
         </form>
         
       </li>
+
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="{% static 'core/js/bootstrap.bundle.min.js' %}"></script>
     

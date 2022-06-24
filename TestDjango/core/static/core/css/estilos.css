@@ -606,6 +606,30 @@ p {
   flex-wrap:wrap;
   
 }
+.btn-success {
+  background-color: #66cccc;
+  border-color:  #fff;
+  color: #fff;
+}
+
+.btn-success:hover  {
+  color: #fff;
+  background-color: #66cccc;
+  border-color: #fff;
+}
+
+.btn-info {
+  background-color: #66cccc;
+  border-color:  #66cccc;
+  color: #fff;
+}
+
+.btn btn-info  {
+  color: #fff;
+  background-color: #66cccc;
+  border-color: #66cccc;
+  
+}
 
 
 .conte{

@@ -49,6 +49,10 @@ def modificar(request):
     return render(request, 'core/modificar.html')
 
 
+def widget(request):
+    return render(request, 'carro/widget.html')
+
+
 
 @csrf_exempt
 @permission_required('app.view_producto')
@@ -158,27 +162,3 @@ def agregardonacion(request):
 
 
     
-
-
-
-
-
-
-
-
-
-    
-
-
-
-#class Persona:
-    #def __init__(self,nombre,edad):
-        #self.nombre=nombre
-       # self.edad=edad
-        #super().__init__()
-
-#def test(request):
-    #lista=["lasaña","Charquican","Porotos verdes"]
-    #hijo=Persona("JUANITO","10")
-    #contexto={"nombre":"anita la huerfanita","comidas": lista, "hijo":hijo}
-    #return render(request, 'core/test.html',contexto)
