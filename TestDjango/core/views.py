@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django. views. decorators. csrf import csrf_exempt
 from carro.carro import Carro
 from core.forms import ProductoForm, CustomUserCreationForm, DonacionForm
-from .models import Producto
+from .models import Donacion, Producto
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib import messages
