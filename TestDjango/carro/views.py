@@ -13,6 +13,18 @@ def agregar_producto (request, producto_id):
     carro.agregar(producto=producto)
     return redirect ("index")
 
+def agregar_productoo (request, producto_id):
+    carro = Carro(request)
+    producto = Producto.objects.get(idProducto = producto_id)
+    carro.agregar(producto=producto)
+    return redirect ("checkout")
+
+def restar_productoo (request, producto_id):
+    carro = Carro(request)
+    producto = Producto.objects.get(idProducto = producto_id)
+    carro.restar_producto(producto=producto)
+    return redirect ("checkout")
+
 def eliminar_producto (request, producto_id):
     carro = Carro(request)
     producto = Producto.objects.get(idProducto = producto_id)

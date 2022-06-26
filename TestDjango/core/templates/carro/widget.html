@@ -1,5 +1,8 @@
+{% load static%}
+<script src="{% static 'core/js/cart.js' %}"></script>
 <div class="container">
-    <table class="table table-bordered table-responsive" style="color: white; margin-top: 10px;">  
+    <table class="table table-bordered table-responsive" style="color: white; margin-top: 10px;">
+        
         <thead>
             <tr>
                 <th colspan="5" class="text-center">
@@ -51,7 +54,7 @@
             {% if request.session.carro.items%}
             <tr>
                 <td colspan="5" style="text-align: center" >
-                    <a href="#" class="btn btn-primary">Hacer pedido</a>
+                    <a href="{% url 'checkout' %}" class="btn btn-primary">Hacer pedido</a>
                 </td>
             </tr>
             {% endif %}
