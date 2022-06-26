@@ -1,0 +1,72 @@
+{% extends "core/base.html"%}
+{% load static%}
+
+<title>{% block title %} Donacion {% endblock %}</title>
+
+{% block body%}
+    
+{% load crispy_forms_tags %}    
+{% if not suscripcion %}
+<div class="row">
+    <div class="col-12 col-md-3 offset-md-4 py-4">
+        <div class="card">
+            <div class="card-body" >
+                <h1>Donacion</h1>
+                <hr>
+
+                <div class="d-flex justify-content-center ">   
+
+                <form action="" method="POST" enctype="multipart/form-data"> 
+                    {% csrf_token %}
+                    {{form | crispy }}
+                    <br>
+                    <div class="d-flex justify-content-right">
+                        <button type="submit" class="btn btn-danger" id="guardar">Aceptar</button>
+                        &nbsp;
+                        <button type="reset" class="btn btn-primary btn-block text-white" id="limpiar">Actualizar</button>
+                    </div>
+                </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+<main class="container">
+    <div class="row g-4">
+        <div class="col" style="text-align:center;">
+            <div class="alert alert-secondary" role="alert" >
+                <h2 class="alert-heading">¡Estás suscrito!</h2>
+                <h4>Gracias por esta buena acción. </h4>
+                <a href="{% url 'modificar_suscripcion' suscripcion.id %}"><button type="button" class="btn btn-primary mt-2" id="enviar-btn"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                <a href="#" onclick="eliminarSuscripcion({{ suscripcion.id }})"><button type="button" class="btn btn-primary mt-2" id="enviar-btn"><i class="fa-solid fa-trash-can"></i></button></a>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endif %}
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function eliminarSuscripcion(id){
+            Swal.fire({
+                "title":"¿Estás seguro?",
+                "text":"Al cancelar la suscripción no podrás volver atrás.",
+                "icon":"warning",
+                "showCancelButton":true,
+                "cancelButtonText": "Cancelar",
+                "confirmButtonText": "Eliminar",
+                "reverseButtons":true,
+                "confirmButtonColor":"#558F67",
+                "cancelButtonColor":"#dc3545"
+            })
+            .then(function(result){
+                if(result.isConfirmed){
+                    window.location.href="/cancelarsuscripcion/"+id+"/"
+                }
+            })
+        }
+    </script>
+
+{% endblock %}

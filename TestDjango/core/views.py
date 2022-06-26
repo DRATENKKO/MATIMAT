@@ -10,7 +10,8 @@ from django.http import Http404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
-
+from rest_framework.authtoken.models import Token
+import requests
 
 # Create your views here.
 
@@ -141,21 +142,93 @@ def registro(request):
 
 
 @csrf_exempt
-@permission_required('app.add_donacion')
-def agregardonacion(request):
+@login_required
+def crear_suscripcion(request):
+    token = Token.objects.get(user=request.user)
+    headers = {'Authorization': f'Token {token}'}
+
+    # Consultar suscripciones
+    url_lista = "http://127.0.0.1:8000/api/lista_donacion"
+    suscripciones = requests.get(url_lista, headers=headers).json()
+    
     datos= {
         'form' : DonacionForm()
     }  
+    
+    # Buscar si usuario esta suscrito y obtener suscripcion
+    for i in suscripciones:
+        if i['suscriptor'] == request.user.id:
+            id = i['id']
+            url_detalle = f'http://127.0.0.1:8000/api/detalle_donacion/{id}'
+            datos['suscripcion'] = requests.get(url_detalle, headers=headers).json()
+    
     if request.method == 'POST':
-        formulario = DonacionForm(request.POST, files=request.FILES)
+        formulario = DonacionForm(data=request.POST)
         
         if formulario.is_valid():
-            formulario.save()
+            copia_dict = request.POST.copy()
+            copia_dict['suscriptor'] = request.user.id
+            requests.post(url_lista, headers=headers, json=copia_dict)
             messages.success(request, "¡Gracias por tu donacion! Has sido beneficiado con un 5% de descuento en tu próxima compra.")
+            formulario.save()
+            return redirect(to="index")
         else:
             datos["form"] = formulario
     
-    return render(request, 'core/agregardonacion.html', datos)
+    return render(request, 'core/suscripcion.html', datos)
+
+@login_required
+def lista_suscripciones(request):
+
+    url = "http://127.0.0.1:8000/api/lista_donacion"
+    token = Token.objects.get(user=request.user)
+    headers = {'Authorization': f'Token {token}'}
+
+    suscripciones = requests.get(url, headers=headers).json()
+
+    data = {
+        'suscripciones' : suscripciones,
+    }
+
+    return render(request, 'suscripciones/listar.html', data)
+
+
+@login_required
+def cancelar_suscripcion(request, id): 
+
+    url = f'http://127.0.0.1:8000/api/detalle_donacion/{id}'
+    token = Token.objects.get(user=request.user)
+    headers = {'Authorization': f'Token {token}'}
+
+    requests.delete(url, headers=headers)
+    messages.info(request, "Al apretar esta acción no podras volver atrás.", extra_tags='Suscripcion Cancelada')
+    
+    return redirect(to="index")
+
+# MODIFICAR SUSCRIPCION (REST)
+@login_required
+def modificar_suscripcion(request, id): 
+
+    url = f'http://127.0.0.1:8000/api/detalle_donacion/{id}'
+    token = Token.objects.get(user=request.user)
+    headers = {'Authorization': f'Token {token}'}
+
+    suscripcion = requests.get(url, headers=headers).json()
+    
+    data = {
+        'form' : DonacionForm(data=suscripcion)
+    }
+
+    if request.method == 'POST':
+        formulario = DonacionForm(data=request.POST)
+        if formulario.is_valid():
+            requests.put(url, headers=headers, json=request.POST)
+            messages.success(request, "Se ha modificado correctamente.", extra_tags='Modificada')
+            return redirect(to="lista_suscripciones")
+        else:
+            data["form"] = formulario
+    
+    return render(request, 'suscripciones/modificar.html', data)
 
 
 

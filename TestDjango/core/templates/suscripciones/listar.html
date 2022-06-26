@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block titulo %}
+<title>Suscripciones</title>
+{% endblock %}
+
+
+{% block body %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+<main class="container table-responsive col-lg-9">
+    <br>
+    <h1>Donadores</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mt-4" id="categorias" style="font-size:20px;">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre </th>
+                    <th>Telefono</th>
+                    <th>Valor</th>
+                    <th>Estado</th>
+                    <th style="text-align:center;min-width:100px;">Acci&oacute;n</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for s in suscripciones %}
+                    <tr>
+                        <td>{{s.suscriptor}}</td>
+                        <td>{{s.nombredonante}}</td>
+                        <td>{{s.telefono}}</td>
+                        <td>{{s.valor}}</td>
+                        <td>{{s.estado}}</td>
+
+                        
+                        <td style="text-align:center;">
+                            <a href="{% url 'modificar_suscripcion' s.id %}" class="btn btn-info">Editar</a>
+                            &nbsp;
+                            <a href="#" onclick="eliminarSuscripcion({{ s.id }})" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </tbody>         
+        </table>
+    </div>
+</main>  
+<div>
+</div>
+
+{% block js %}
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function eliminarSuscripcion(id){
+        Swal.fire({
+            "title":"¿Estás seguro?",
+            "text":"Al cancelar la suscripción no podrás volver atrás.",
+            "icon":"warning",
+            "showCancelButton":true,
+            "cancelButtonText": "Cancelar",
+            "confirmButtonText": "Eliminar",
+            "reverseButtons":true,
+            "confirmButtonColor":"#558F67",
+            "cancelButtonColor":"#dc3545"
+        })
+        .then(function(result){
+            if(result.isConfirmed){
+                window.location.href="/cancelarsuscripcion/"+id+"/"
+            }
+        })
+    }
+</script>
+
+{% endblock %}
+
+{% endblock %}

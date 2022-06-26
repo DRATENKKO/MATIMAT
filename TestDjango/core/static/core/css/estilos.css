@@ -185,7 +185,13 @@ transition: 0.5s;
   background-color: #bb7171;
 }
 
-
+.alert-secondary {
+  color: #fff;
+  background-color: #4ca1f5;
+  border-color: #4ca1f5;
+  padding: 55px;
+  margin-top: 30px;
+}
 
 
 main {
@@ -193,7 +199,6 @@ main {
 	width: 90%;
 	margin: auto;
 	padding: 40px;
-  background-color: #24303c;
   margin-bottom: 50px;
   margin-top: 30px;
   border-radius: 15px;

@@ -42,35 +42,16 @@ class ClienteForm(ModelForm):
        
 class DonacionForm(forms.ModelForm):
     
-    nombredonante = forms.CharField(min_length=3, max_length=50, label="Nombre Completo")
-    correo = forms.EmailField(max_length=254, label="Correo")
+    nombredonante = forms.CharField(min_length=3, max_length=50, label="Nombre completo")
     telefono = forms.IntegerField(max_value=999999999, label="Telefono")
-    valor = forms.IntegerField(min_value=1000, max_value=1500000, label="Valor")
-    
-    
-    def clean_correo(self):
-        #en self.changed_data esta todo lo que ingrso el usuario en el formulario.
-        correo = self.cleaned_data['correo']
-        #validar si el correo existe
-        existe = Donacion.objects.filter(correo=correo).exists()
-        # si existe mostrar un error al usuario
-        if existe:
-            raise ValidationError("Este correo ya existe")
-        
-        return correo
-       
-       
-       
-       
-       
-       
+    valor = forms.IntegerField(min_value=1000, max_value=1500000, label="Monto")
        
     class Meta:
        model = Donacion
-       fields = ["nombredonante", "correo", "telefono","valor"]
+       fields = ["nombredonante", "telefono","valor"]
 
 
               
         
         
-    
+  

@@ -46,19 +46,20 @@ class Cliente(models.Model):
         texto = "{0} ({1})"
         return texto.format(self.idCliente, self.nombreCliente)
     
+    
+    
 class Donacion(models.Model):   
+    suscriptor = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     nombredonante = models.CharField(max_length=50)
-    correo = models.EmailField(max_length=254)
     telefono = models.IntegerField()
     valor = models.IntegerField()
-    desc = models.DecimalField(default=0.05, max_digits=5, decimal_places=2)
+    fecha = models.DateTimeField(auto_now= True)
+    estado = models.BooleanField(default = True, null = True)
     
 
     def _str_(self):
         return self.nombredonante
     
-    
-
     
 
 
