@@ -57,19 +57,7 @@ def widget(request):
     return render(request, 'carro/widget.html')
 
 def checkout(request):
-    if request.user.is_authenticated:
-        pedido, creado = Pedido.objects.get_or_create()
-    data = {}
-    return render(request, 'carro/checkout.html', data)
-
-def actualizarItem(request):
-    data = json.loads(request.data)
-    productId = data['productId']
-    action = data['action']
-    
-    print('Action:', action)
-    print('productId:', productId)
-    return JsonResponse('El objeto fue añadido', safe=False)
+    return render(request, 'carro/checkout.html')
 
 
 @csrf_exempt
