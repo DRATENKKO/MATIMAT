@@ -234,7 +234,7 @@ def modificar_suscripcion(request, id):
             data["form"] = formulario
     
     return render(request, 'suscripciones/modificar.html', data)
-
+#
 
 
 
