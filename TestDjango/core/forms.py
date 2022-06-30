@@ -4,6 +4,7 @@ from .models import Producto, Cliente, Donacion
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .validators import MaxSizeFileValidator
+from django.contrib.auth.forms import AuthenticationForm
 
 class ProductoForm(forms.ModelForm):
     nombre = forms.CharField(min_length=3, max_length=50)

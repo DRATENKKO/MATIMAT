@@ -16,6 +16,7 @@ from django.http import Http404
 from django.contrib import messages
 from django.http import JsonResponse
 import json
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 def index(request):
@@ -58,6 +59,10 @@ def widget(request):
 
 def checkout(request):
     return render(request, 'carro/checkout.html')
+
+def custom_login(request):
+    return render(request, 'registration/customlogin.html')
+
 
 
 @csrf_exempt
@@ -141,9 +146,9 @@ def registro(request):
             user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             login(request, user)
             messages.success(request, "Te has registrado correctamente")
-            return redirect(to="index")
+            return redirect(to="/custom_login")
         data["form"] = formulario        
-    return render(request, 'registration/registro.html', data)
+    return render(request, 'registration/customlogin.html', data)
 
 
 @csrf_exempt
@@ -234,9 +239,22 @@ def modificar_suscripcion(request, id):
             data["form"] = formulario
     
     return render(request, 'suscripciones/modificar.html', data)
-#
 
+def custom_login(request):
+    hola = "hola"
+    data = {
+        'form' : AuthenticationForm,
+        'saludo' : hola
+    }
+    if request.method == 'POST':
+        formulario = AuthenticationForm(data=request.POST)
 
-
-
-    
+        if formulario.is_valid():
+            url = "http://127.0.0.1:8000/api/login_user"
+            requests.post(url, json=request.POST)
+            user = authenticate(username = formulario.cleaned_data["username"], password = formulario.cleaned_data["password"])
+            login(request, user)
+            return redirect(to="index")
+        else:
+            data['form'] = formulario
+    return render(request, 'registration/customlogin.html', data)

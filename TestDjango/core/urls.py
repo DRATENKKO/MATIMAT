@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import index, donacion, Carrito, Gato, Perro, tarjeta, todos, listar, modificar,\
 agregar, eliminarProducto, modificarProducto, registro,widget,crear_suscripcion,\
-lista_suscripciones,cancelar_suscripcion, modificar_suscripcion,checkout
+lista_suscripciones,cancelar_suscripcion, modificar_suscripcion,checkout, custom_login
 
 urlpatterns = [
     path('', index, name='index'),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('suscripciones/', lista_suscripciones, name="lista_suscripciones"), 
     path('cancelarsuscripcion/<id>/', cancelar_suscripcion, name="cancelar"), 
     path('modificarsuscripcion/<id>/', modificar_suscripcion, name="modificar_suscripcion"), 
+    path('custom_login', custom_login, name="custom_login"),
 ]
