@@ -3,5 +3,5 @@ from .import views
 
 
 urlpatterns = [
-    path('pedidos/', views.procesar_pedido, name='procesar'),
+    #path('pedidos/', views.procesar_pedido, name='procesar'),
 ]

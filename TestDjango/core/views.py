@@ -2,8 +2,10 @@ from distutils.log import error
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django. views. decorators. csrf import csrf_exempt
+from pedidos.models import EnvioDireccion
 from carro.carro import Carro
 from core.forms import ProductoForm, CustomUserCreationForm, DonacionForm
+from pedidos.forms import EnvioDireccionForm
 from .models import *
 from django.core.paginator import Paginator
 from django.http import Http404
@@ -11,6 +13,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 from rest_framework.authtoken.models import Token
+from pedidos.models import Pedido, LineaPedido
 import requests
 from django.http import Http404
 from django.contrib import messages
@@ -58,11 +61,37 @@ def widget(request):
     return render(request, 'carro/widget.html')
 
 def checkout(request):
-    return render(request, 'carro/checkout.html')
+    datos = {
+        'form' : EnvioDireccionForm()
+    }
+    if request.method == 'POST':
+        formulario = EnvioDireccionForm(data=request.POST) 
+        if formulario.is_valid():
+            messages.error(request, "El pedido se ha creado correctamente!")
+            formulario.save()
+            return redirect(to="index")
+        else:
+            datos["form"] = formulario
+    if request.user.is_authenticated:
+        pedido = Pedido.objects.create(user=request.user)
+        carro = Carro(request)
+        lineas_pedido=list()
+        for key, value in carro.carro.items(): 
+            lineas_pedido.append(LineaPedido( # aqui rescatamos cada uno de los items
+                producto_id = Producto.objects.get(idProducto = key),
+                cantidad = value["cantidad"],
+                user = request.user,
+                pedido_id = pedido            
+                ))     
+        LineaPedido.objects.bulk_create(lineas_pedido)
+        
+    return render(request, 'carro/checkout.html', datos)
+
+
+
 
 def custom_login(request):
     return render(request, 'registration/customlogin.html')
-
 
 
 @csrf_exempt
@@ -93,7 +122,7 @@ def agregar(request):
         'form' : ProductoForm()
     }  
     if request.method == 'POST':
-        formulario = ProductoForm(request.POST, files=request.FILES)
+        formulario = ProductoForm(request.POST)
         
         if formulario.is_valid():
             formulario.save()
@@ -148,7 +177,7 @@ def registro(request):
             messages.success(request, "Te has registrado correctamente")
             return redirect(to="/custom_login")
         data["form"] = formulario        
-    return render(request, 'registration/customlogin.html', data)
+    return render(request, 'registration/registro.html', data)
 
 
 @csrf_exempt
@@ -241,10 +270,8 @@ def modificar_suscripcion(request, id):
     return render(request, 'suscripciones/modificar.html', data)
 
 def custom_login(request):
-    hola = "hola"
     data = {
         'form' : AuthenticationForm,
-        'saludo' : hola
     }
     if request.method == 'POST':
         formulario = AuthenticationForm(data=request.POST)
@@ -258,3 +285,4 @@ def custom_login(request):
         else:
             data['form'] = formulario
     return render(request, 'registration/customlogin.html', data)
+

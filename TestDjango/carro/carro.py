@@ -14,6 +14,7 @@ class Carro:
                 "producto_id": producto.idProducto,
                 "nombre" : producto.nombre,
                 "precio": producto.precio,
+                "preciounit": producto.precio,
                 "cantidad": 1
             }
         else:
@@ -21,7 +22,8 @@ class Carro:
                 if key==str(producto.idProducto):
                     value["cantidad"]=value["cantidad"]+1
                     value["precio"]=value["precio"]+producto.precio
-                    break
+                    value["preciounit"]=value["preciounit"]
+                    break 
         self.guardar_carro()
         
         

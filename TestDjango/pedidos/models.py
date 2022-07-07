@@ -35,7 +35,7 @@ class LineaPedido(models.Model):
     
     
     def __str__(self): 
-        return f'{self.cantidad} unidades de {self.producto_id.nombre}'
+        return f'usuario: {self.user} | | pedido: {self.pedido_id} | | compró {self.cantidad} unidades de {self.producto_id.nombre}'
 
         
     class Meta:
@@ -43,3 +43,17 @@ class LineaPedido(models.Model):
         verbose_name = 'Linea Pedido'
         verbose_name_plural = 'Lineas Pedidos'
         ordering = ['id']  
+        
+        
+class EnvioDireccion(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=True, db_constraint=False)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, default=True, db_constraint=False)
+    direccion = models.CharField(max_length=200, null=True)
+    ciudad = models.CharField(max_length=200, null=True)
+    region = models.CharField(max_length=200, null=True)
+    codigo_postal = models.CharField(max_length=200, null=True)
+    fecha_sumar = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'usuario: {self.user} | |  direccion: {self.direccion}'
+

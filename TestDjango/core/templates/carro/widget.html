@@ -24,7 +24,7 @@
                         <td>{{value.cantidad}}</td>
                         <td><a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-success">+</a></td>
                         <td><a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-success">-</a></td>
-                        <td>${{value.precio}}</td>
+                        <td>${{value.preciounit}}</td>
                         
 
                     </tr>
@@ -54,7 +54,7 @@
             {% if request.session.carro.items%}
             <tr>
                 <td colspan="5" style="text-align: center" >
-                    <a href="{% url 'checkout' %}" class="btn btn-primary">Hacer pedido</a>
+                    <a class="btn btn-primary" href="{% url 'checkout' %}">Pagar</a>
                 </td>
             </tr>
             {% endif %}

@@ -15,96 +15,105 @@
 
 {% block body%}
 <body>
+    
     <div class="row">
-
 		<div class="col-lg-6">
 			<div class="box-element">
-                <table class="table table-bordered table-responsive" style="margin-top: 10px;">
-        
-                    <thead>
-                        <tr>
-                            <th colspan="5" class="text-center">
-                                Carro de compras  <a id="boton" onclick="cerrar();" class="fa-solid fa-xmark" href="#"></a>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th colspan="2">Suma</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if request.session.carro.items %}
-                            {% for key, value in request.session.carro.items %}
-                                <tr class="text-center">
-                                    <td>{{value.nombre}}</td>
-                                    <td>{{value.cantidad}}</td>
-                                    <td><a href="{% url 'carro:agregarr' value.producto_id %}" class="btn btn-success">+</a></td>
-                                    <td><a href="{% url 'carro:restarr' value.producto_id %}" class="btn btn-success">-</a></td>
-                                    <td>${{value.precio}}</td>
+                <div class="table-responsive">
+                    <table class="table align-middle mt-4" style="font-size: 20px;">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio Unit.</th>
+                                <th>Cantidad</th>
+                                <th colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if request.session.carro.items %}
+                                {% for key, value in request.session.carro.items %}
+                                
+                                    <tr class="text-center">
+                                        <td>{{value.nombre}}</td>
+                                        <td>${{value.preciounit}}</td>
+                                        <td>{{value.cantidad}}</td>
+                                        <td><a href="{% url 'carro:agregarr' value.producto_id %}" class="btn btn-success">+</a></td>
+                                        <td><a href="{% url 'carro:restarr' value.producto_id %}" class="btn btn-success">-</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                    
+                        </tbody>
+                        <div class="col">
+                            <table class="table align-middle m-0"  style="font-size:20px;">
+                                <tbody>
+                                    <tr>
+                                        <th>Total</th>
+                                        <td>${{importe_total_carrito }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Descuento suscriptor ""</th>
+                                        <td>Pendiente</td>
+                                    </tr>
+                                    <tr class="bg-light">
+                                        <th>Precio Final</th>
+                                        <td>${{importe_total_carrito }}</td>
+                                    </tr>
                                     
-            
-                                </tr>
-            
-            
-                            {% endfor %}
-                        {% else %}
-                        <tr>
-                            <td colspan="5">
-                                <div class="alert alert-info text-center">
-                                    Sin Productos
-                                </div>
-                        </tr>
-                        {% endif %}
-            
-                    </tbody>
-            
-                    <tfoot>
-                        <tr>
+                                </tbody>
+                                
+                            </table>
+                            <br>
+                            {% load crispy_forms_tags %}
+                            <div class="box-element" id="form-wrapper">
+                                <div id="shipping-info">
+                                    <hr>
+                                    <p>Datos para envío</p>
+                                    <hr>
+                                    <form action="" method="POST" enctype="multipart/form-data"> 
+                                        {% csrf_token %}
+                                        {{form | crispy }}
+                                        <br>
+                                        <div class="d-flex justify-content-right">
+                                            <button class="btn btn-success btn-block">Pagar</button>
+                                        </div>
+                                    </form>
                             
-                            <td colspan="5">
-                                Total : $ {{importe_total_carrito }}
-                                <div style="text-align: center; font-size: 20px;">
+                                <hr>
+                            
+                            
+                                    </form>
                                 </div>
-                            </td>
-                        </tr>
-                    </tfoot>
-            
+                                
+                            </div>
+                        </div>
+                            <hr>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
                 </table>
+                <hr>
 			</div>
 		</div>
-		<div class="col-lg-6">
-			<div class="box-element" id="form-wrapper">
-					<div id="shipping-info">
-						<hr>
-						<p>Datos para envío</p>
-						<hr>
-						<div class="form-field">
-							<input class="form-control" type="text" name="Direccion" placeholder="Direccion..">
-						</div>
-						<div class="form-field">
-							<input class="form-control" type="text" name="Ciudad" placeholder="Ciudad..">
-						</div>
-						<div class="form-field">
-							<input class="form-control" type="text" name="Region" placeholder="Region..">
-						</div>
-						<div class="form-field">
-							<input class="form-control" type="text" name="Codigo Postal" placeholder="Codigo Postal..">
-						</div>
-					</div>
 
-					<hr>
-
-                     <a href="{% url 'procesar' %}" class="btn btn-success btn-block" id="lala">Pagar</a>
-
-				</form>
-			</div>
-			
-		</div>
-	</div>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+    {% for m in messages %}
+      <script>
+        Swal.fire({
+          "title": "Felicidades!",
+          "text": "{{m}}",
+          "icon": "success",
+
+        })
+      </script>
+    {% endfor %}
+{% endif %}
+
+
 
 
 
